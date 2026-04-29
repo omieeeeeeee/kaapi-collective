@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kaapi Collective - Small-batch specialty coffee roastery in Bandra West, Mumbai. Single-origin beans, pour-overs, and signature cold brews.">
+    <meta property="og:title" content="Kaapi Collective - Specialty Coffee Roastery, Bandra West">
+    <meta property="og:description" content="Small-batch roastery bringing single-origin beans from Coorg, Chikmagalur, and Araku Valley to your cup.">
+    <meta property="og:type" content="website">
+    <title>Kaapi Collective - Specialty Coffee Roastery, Bandra West, Mumbai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --espresso: #2C1810;
+            --cream: #FBF7F2;
+            --roast: #8B5E3C;
+            --copper: #B8784E;
+            --sage: #7A8B6F;
+            --text: #3D2E24;
+            --text-light: #7A6B60;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--cream);
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 400;
+        }
+
+        ::selection {
+            background: var(--roast);
+            color: white;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 50;
+            background: rgba(251, 247, 242, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(139, 94, 60, 0.1);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 22px;
+            color: var(--espresso);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 300ms;
+        }
+
+        .nav-links a:hover { color: var(--espresso); }
+
+        .nav-cta {
+            font-size: 13px;
+            padding: 10px 22px;
+            background: var(--espresso);
+            color: var(--cream);
+            border-radius: 999px;
+            text-decoration: none;
+            transition: opacity 300ms;
+            letter-spacing: 0.03em;
+        }
+
+        .nav-cta:hover { opacity: 0.85; }
+
+        @media (min-width: 640px) {
+            .nav-links { display: flex; }
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 100px 24px 60px;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--roast);
+            border: 1px solid rgba(139, 94, 60, 0.3);
+            padding: 6px 16px;
+            border-radius: 999px;
+            margin-bottom: 32px;
+        }
+
+        .hero-title {
+            font-size: clamp(38px, 7vw, 80px);
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            color: var(--espresso);
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--roast);
+        }
+
+        .hero-desc {
+            font-size: 17px;
+            color: var(--text-light);
+            max-width: 520px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .btn-dark {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 14px 28px;
+            background: var(--espresso);
+            color: var(--cream);
+            border-radius: 999px;
+            text-decoration: none;
+            transition: opacity 300ms;
+        }
+
+        .btn-dark:hover { opacity: 0.85; }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 14px 28px;
+            border: 1px solid rgba(139, 94, 60, 0.3);
+            color: var(--text);
+            border-radius: 999px;
+            text-decoration: none;
+            transition: background 300ms, border-color 300ms;
+        }
+
+        .btn-outline:hover {
+            background: rgba(139, 94, 60, 0.06);
+            border-color: var(--roast);
+        }
+
+        /* Section */
+        .section {
+            padding: 100px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--roast);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 44px);
+            color: var(--espresso);
+            margin-bottom: 48px;
+            letter-spacing: -0.02em;
+        }
+
+        /* Origin Cards */
+        .origins-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .origins-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .origin-card {
+            padding: 36px 28px;
+            border: 1px solid rgba(139, 94, 60, 0.12);
+            border-radius: 16px;
+            background: white;
+            transition: box-shadow 400ms, transform 400ms;
+        }
+
+        .origin-card:hover {
+            box-shadow: 0 12px 40px rgba(44, 24, 16, 0.06);
+            transform: translateY(-4px);
+        }
+
+        .origin-region {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--sage);
+            margin-bottom: 12px;
+        }
+
+        .origin-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 24px;
+            color: var(--espresso);
+            margin-bottom: 12px;
+        }
+
+        .origin-notes {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .origin-tag {
+            display: inline-block;
+            font-size: 11px;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: rgba(122, 139, 111, 0.1);
+            color: var(--sage);
+        }
+
+        /* Menu Highlights */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .menu-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(139, 94, 60, 0.1);
+        }
+
+        .menu-item-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 18px;
+            color: var(--espresso);
+        }
+
+        .menu-item-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .menu-item-price {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--roast);
+            white-space: nowrap;
+            margin-left: 16px;
+        }
+
+        /* About / Story */
+        .story-content {
+            max-width: 640px;
+        }
+
+        .story-text {
+            color: var(--text-light);
+            line-height: 1.9;
+        }
+
+        .story-text p + p {
+            margin-top: 20px;
+        }
+
+        /* Visit */
+        .visit-section {
+            padding: 100px 24px;
+            border-top: 1px solid rgba(139, 94, 60, 0.1);
+        }
+
+        .visit-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .visit-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media (min-width: 768px) {
+            .visit-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .visit-title {
+            font-size: clamp(28px, 5vw, 48px);
+            color: var(--espresso);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .visit-desc {
+            color: var(--text-light);
+            margin-bottom: 32px;
+            max-width: 480px;
+        }
+
+        .info-block {
+            margin-bottom: 28px;
+        }
+
+        .info-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--roast);
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            padding: 32px 24px;
+            border-top: 1px solid rgba(139, 94, 60, 0.1);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .footer-inner p {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        @media (min-width: 640px) {
+            .footer-inner { flex-direction: row; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">Kaapi Collective</a>
+            <div class="nav-links">
+                <a href="#origins">Origins</a>
+                <a href="#menu">Menu</a>
+                <a href="#story">Our Story</a>
+                <a href="#visit" class="nav-cta">Visit Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="reveal">
+                <span class="hero-badge">Bandra West, Mumbai</span>
+            </div>
+            <div class="reveal" style="transition-delay: 100ms">
+                <h1 class="hero-title">
+                    Roasted with<br>
+                    <em>intention,</em><br>
+                    brewed with care.
+                </h1>
+            </div>
+            <div class="reveal" style="transition-delay: 200ms">
+                <p class="hero-desc">
+                    Small-batch specialty roastery bringing single-origin Indian
+                    beans from Coorg, Chikmagalur, and Araku Valley straight to
+                    your cup.
+                </p>
+            </div>
+            <div class="reveal" style="transition-delay: 300ms">
+                <div class="hero-actions">
+                    <a href="#menu" class="btn-dark">
+                        Explore the Menu
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </a>
+                    <a href="#visit" class="btn-outline">Find Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Origins -->
+    <section id="origins" class="section">
+        <div class="reveal">
+            <p class="section-label">Single Origins</p>
+            <h2 class="section-title">Where our beans come from</h2>
+        </div>
+        <div class="origins-grid">
+            <div class="reveal" style="transition-delay: 0ms">
+                <div class="origin-card">
+                    <p class="origin-region">Karnataka</p>
+                    <h3 class="origin-name">Chikmagalur Estate</h3>
+                    <p class="origin-notes">
+                        Grown at 1,400m in the Western Ghats. Tasting notes of
+                        dark chocolate, roasted almond, and a hint of cardamom.
+                    </p>
+                    <span class="origin-tag">Medium Roast</span>
+                </div>
+            </div>
+            <div class="reveal" style="transition-delay: 100ms">
+                <div class="origin-card">
+                    <p class="origin-region">Karnataka</p>
+                    <h3 class="origin-name">Coorg Monsoon</h3>
+                    <p class="origin-notes">
+                        Monsoon-processed beans with a full body. Notes of
+                        tobacco, dark caramel, and black pepper with a smooth finish.
+                    </p>
+                    <span class="origin-tag">Dark Roast</span>
+                </div>
+            </div>
+            <div class="reveal" style="transition-delay: 200ms">
+                <div class="origin-card">
+                    <p class="origin-region">Andhra Pradesh</p>
+                    <h3 class="origin-name">Araku Valley</h3>
+                    <p class="origin-notes">
+                        Tribal-grown, shade-dried. Bright and fruity with notes
+                        of citrus, honey, and jasmine. Light and clean.
+                    </p>
+                    <span class="origin-tag">Light Roast</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="section" style="padding-top: 0">
+        <div class="reveal">
+            <p class="section-label">The Menu</p>
+            <h2 class="section-title">What we are pouring</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="reveal">
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name">Pour Over</div>
+                        <div class="menu-item-desc">Single origin, hand-brewed to order</div>
+                    </div>
+                    <span class="menu-item-price">&#8377;280</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name">Espresso</div>
+                        <div class="menu-item-desc">Double shot, Chikmagalur blend</div>
+                    </div>
+                    <span class="menu-item-price">&#8377;220</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name">Cold Brew</div>
+                        <div class="menu-item-desc">20-hour steep, served over ice</div>
+                    </div>
+                    <span class="menu-item-price">&#8377;320</span>
+                </div>
+            </div>
+            <div class="reveal" style="transition-delay: 100ms">
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name">Flat White</div>
+                        <div class="menu-item-desc">Velvety microfoam, double ristretto</div>
+                    </div>
+                    <span class="menu-item-price">&#8377;300</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name">Filter Kaapi</div>
+                        <div class="menu-item-desc">South Indian style, brass tumbler</div>
+                    </div>
+                    <span class="menu-item-price">&#8377;180</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name">Affogato</div>
+                        <div class="menu-item-desc">Espresso over vanilla bean gelato</div>
+                    </div>
+                    <span class="menu-item-price">&#8377;350</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story -->
+    <section id="story" class="section" style="padding-top: 0">
+        <div class="reveal">
+            <div class="story-content">
+                <p class="section-label">Our Story</p>
+                <h2 class="section-title">Started with one question</h2>
+                <div class="story-text">
+                    <p>
+                        Why does India grow some of the world's finest coffee beans, yet
+                        most of it gets exported? Kaapi Collective started in 2021 as an
+                        answer to that question. We source directly from estates in
+                        Coorg, Chikmagalur, and Araku Valley, roast in small batches
+                        at our Bandra roastery, and serve it the way it deserves.
+                    </p>
+                    <p>
+                        Every cup traces back to a specific farm, a specific harvest.
+                        We keep things simple: good beans, careful roasting, honest
+                        brewing. No shortcuts.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit -->
+    <section id="visit" class="visit-section">
+        <div class="visit-inner">
+            <div class="reveal">
+                <p class="section-label">Visit Us</p>
+                <h2 class="visit-title">Come say hello</h2>
+            </div>
+            <div class="visit-grid">
+                <div class="reveal" style="transition-delay: 100ms">
+                    <p class="visit-desc">
+                        Walk in, grab a seat, and try something new. We are
+                        always happy to talk beans, brewing, or anything else.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="https://maps.google.com/?q=Bandra+West+Mumbai" target="_blank" rel="noopener noreferrer" class="btn-dark">
+                            Get Directions
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="reveal" style="transition-delay: 200ms">
+                    <div class="info-block">
+                        <p class="info-label">Address</p>
+                        <p class="info-value">
+                            14, Hill Road, Bandra West<br>
+                            Mumbai 400050
+                        </p>
+                    </div>
+                    <div class="info-block">
+                        <p class="info-label">Hours</p>
+                        <p class="info-value">
+                            Mon - Fri: 8:00 AM - 9:00 PM<br>
+                            Sat - Sun: 9:00 AM - 10:00 PM
+                        </p>
+                    </div>
+                    <div class="info-block">
+                        <p class="info-label">Contact</p>
+                        <p class="info-value">
+                            +91 22 2640 8800<br>
+                            hello@kaapicollective.in
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <p>Kaapi Collective</p>
+            <p>Bandra West, Mumbai</p>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15 }
+        );
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
